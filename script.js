@@ -1,10 +1,28 @@
 /* ─── Default Tools ─── */
 const DEFAULT_TOOLS = [
-  { id: genId(), name: "Google Keep", url: "https://keep.google.com",   category: "Work Tools" },
-  { id: genId(), name: "Gemini",      url: "https://gemini.google.com", category: "AI Tools"   },
-  { id: genId(), name: "ChatGPT",     url: "https://chat.openai.com",   category: "AI Tools"   },
-  { id: genId(), name: "Claude",      url: "https://claude.ai",         category: "AI Tools"   },
+  { id: 1773718815744, name: "Google Keep", url: "https://keep.google.com", category: "Work Tools" },
+  { id: 1773719272337, name: "ChatGPT", url: "https://chat.openai.com", category: "AI Tools" },
+  { id: 1773727392700, name: "gmail", url: "https://mail.google.com/mail/u/1/#all", category: "AI Tools" },
+  { id: 1773727922699, name: "github", url: "https://github.com/html-ramu", category: "AI Tools" },
+  { id: 1773727939086, name: "sarvam", url: "https://dashboard.sarvam.ai/", category: "AI Tools" },
+  { id: 1773727233486, name: "docs", url: "https://docs.google.com/document/u/1/", category: "AI Tools" },
+  { id: 1773727401903, name: "drive", url: "https://drive.google.com/drive/u/1/home", category: "AI Tools" },
+  { id: 1773727397050, name: "circle crop", url: "https://html-ramu.github.io/circular-crop-tool/", category: "AI Tools" },
+  { id: 1773727727907, name: "linked in", url: "https://www.linkedin.com/feed/", category: "AI Tools" },
+  { id: 1773727712257, name: "cloud flare", url: "https://dash.cloudflare.com/login", category: "AI Tools" },
+  { id: 1773727913099, name: "sora", url: "https://sora.chatgpt.com/explore", category: "AI Tools" },
+  { id: 1773727278702, name: "proton mail", url: "https://account.proton.me/apps", category: "AI Tools" },
+  { id: 1773727919435, name: "account expert", url: "https://web.accountsexpertapp.com/new-courses/14-free-material-content?activeTab=content", category: "AI Tools" },
+  { id: 1773727846669, name: "whats app", url: "https://web.whatsapp.com/", category: "AI Tools" },
+  { id: 1773727976790, name: "green key", url: "https://html-ramu.github.io/greenkey/", category: "AI Tools" },
+  { id: 1773728472245, name: "chroma key", url: "https://html-ramu.github.io/chroma-key-tool/", category: "AI Tools" },
+  { id: 1773727985003, name: "news ticker", url: "https://html-ramu.github.io/news-ticker/", category: "AI Tools" },
+  { id: 1773728251242, name: "text wrap", url: "https://b10design.work/", category: "AI Tools" },
+  { id: 1773728211874, name: "ticker generator", url: "https://html-ramu.github.io/ticker-generator/", category: "AI Tools" },
+  { id: 1773728775428, name: "epaper b10", url: "https://epaperb10vartha.in/#", category: "AI Tools" },
+  { id: 1773728587239, name: "b10vartha", url: "https://www.b10vartha.in/", category: "AI Tools" }
 ];
+
 
 function genId() { return Date.now() + Math.floor(Math.random() * 1e6); }
 
