@@ -107,18 +107,15 @@ function renderTools() {
         <span class="tool-name">${esc(tool.name)}</span>
         <span class="tool-url">${esc(cleanUrl)}</span>
       </div>
-      <span class="category-badge ${catClass(tool.category)}">${esc(tool.category)}</span>
+      
       <button class="btn-open" data-url="${esc(tool.url)}">
         <i class="fas fa-external-link-alt"></i> Open
       </button>
-      <button class="btn-delete" data-id="${tool.id}">
-        <i class="fas fa-trash"></i> Delete
-      </button>
+      
     `;
 
     row.querySelector(".btn-open").addEventListener("click",   () => window.open(tool.url, "_blank"));
-    row.querySelector(".btn-delete").addEventListener("click", () => deleteTool(tool.id));
-
+    
     row.addEventListener("dragstart", onDragStart);
     row.addEventListener("dragover",  onDragOver);
     row.addEventListener("drop",      onDrop);
@@ -139,7 +136,8 @@ function esc(str) {
 function addTool() {
   let name = document.getElementById("toolName").value.trim();
   let url  = document.getElementById("toolURL").value.trim();
-  const cat  = document.getElementById("toolCategory").value;
+  const cat = "Other";
+
 
   if (!name) { showToast("Please enter a tool name", "error"); return; }
   if (!url)  { showToast("Please enter a tool URL",  "error"); return; }
@@ -262,14 +260,5 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("searchInput").addEventListener("input", e => {
     searchQuery = e.target.value;
     renderTools();
-  });
-
-  document.querySelectorAll(".filter-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      currentFilter = btn.dataset.filter;
-      renderTools();
-    });
   });
 });

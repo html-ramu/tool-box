@@ -10,9 +10,6 @@
   --accent-soft: rgba(0,0,0,0.05);
   --btn-open: #222222;
   --btn-open-hover: #000000;
-  --btn-delete-bg: #f5f5f5;
-  --btn-delete-color: #444444;
-  --btn-delete-hover: #222222;
   --shadow: 0 1px 4px rgba(0,0,0,0.08);
   --shadow-hover: 0 4px 16px rgba(0,0,0,0.14);
 }
@@ -29,9 +26,6 @@
   --accent-soft: rgba(255,255,255,0.05);
   --btn-open: #e0e0e0;
   --btn-open-hover: #ffffff;
-  --btn-delete-bg: #1e1e1e;
-  --btn-delete-color: #aaaaaa;
-  --btn-delete-hover: #333333;
   --shadow: 0 1px 4px rgba(0,0,0,0.5);
   --shadow-hover: 0 4px 16px rgba(0,0,0,0.7);
 }
@@ -177,24 +171,6 @@ body {
   transition: border-color 0.2s;
 }
 .search-box input:focus { border-color: var(--text-primary); }
-.filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
-.filter-btn {
-  padding: 7px 14px;
-  border: 1.5px solid var(--border-color);
-  border-radius: 6px;
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.filter-btn:hover { border-color: var(--text-primary); color: var(--text-primary); }
-.filter-btn.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--bg-secondary);
-}
 
 /* ── Tools Header ── */
 .tools-header {
@@ -215,7 +191,7 @@ body {
   border-radius: 10px;
   padding: 13px 16px;
   display: grid;
-  grid-template-columns: 36px 1fr auto auto auto;
+  grid-template-columns: 36px 1fr auto auto;
   align-items: center;
   gap: 14px;
   box-shadow: var(--shadow);
@@ -252,7 +228,7 @@ body {
 .tool-name { font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tool-url { font-size: 11px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* All category badges same: monochrome */
+/* ── Category Badge ── */
 .category-badge {
   padding: 4px 11px;
   border-radius: 4px;
@@ -266,13 +242,13 @@ body {
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
 }
-/* Override all category color classes to be monochrome */
 .cat-ai, .cat-news, .cat-work, .cat-other {
   background: var(--accent-soft);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
 }
 
+/* ── Open Button ── */
 .btn-open {
   background: var(--btn-open);
   color: var(--bg-secondary);
@@ -289,29 +265,7 @@ body {
   white-space: nowrap;
 }
 .btn-open:hover { background: var(--btn-open-hover); transform: translateY(-1px); }
-
-/* Dark mode: open button inverts */
 .dark-mode .btn-open { color: #111; }
-
-.btn-delete {
-  background: var(--btn-delete-bg);
-  color: var(--btn-delete-color);
-  border: 1.5px solid var(--border-color);
-  padding: 8px 12px;
-  border-radius: 7px;
-  font-size: 13px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: all 0.2s;
-}
-.btn-delete:hover {
-  background: var(--btn-delete-hover);
-  color: var(--bg-secondary);
-  border-color: transparent;
-}
-.dark-mode .btn-delete:hover { color: #f0f0f0; }
 
 /* ── Empty State ── */
 .empty-state { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
@@ -348,8 +302,7 @@ body {
   #addToolBtn { grid-column: span 2; justify-content: center; }
   .tool-row { grid-template-columns: 30px 1fr auto; grid-template-rows: auto auto; gap: 8px; }
   .category-badge { grid-row: 2; grid-column: 2; justify-self: start; }
-  .btn-open  { grid-row: 1; grid-column: 3; }
-  .btn-delete { grid-row: 2; grid-column: 3; }
+  .btn-open { grid-row: 1; grid-column: 3; }
   .header { padding: 12px 16px; }
   .header h1 { font-size: 17px; }
   .main-content { padding: 18px 12px 50px; }
@@ -357,16 +310,14 @@ body {
 @media (max-width: 480px) {
   .form-grid { grid-template-columns: 1fr; }
   #addToolBtn { grid-column: span 1; }
-  .filter-tabs .filter-btn { font-size: 11px; padding: 6px 10px; }
 }
 
-/* ── Dark Mode: Remove white fills from number badges & Open buttons ── */
+/* ── Dark Mode ── */
 .dark-mode .tool-number {
   background: #2a2a2a;
   color: #dddddd;
   border: 1px solid #444444;
 }
-
 .dark-mode .btn-open {
   background: #1e1e1e;
   color: #cccccc;
@@ -378,23 +329,6 @@ body {
   border-color: #888888;
   transform: translateY(-1px);
 }
-
-.dark-mode .filter-btn.active {
-  background: #e0e0e0;
-  color: #111111;
-  border-color: #e0e0e0;
-}
-
-.dark-mode #addToolBtn {
-  background: #e0e0e0;
-  color: #111111;
-}
-.dark-mode #addToolBtn:hover {
-  background: #ffffff;
-  color: #000000;
-}
-
-/* ── Fix: Add Tool button white fill in dark mode ── */
 .dark-mode #addToolBtn {
   background: #2a2a2a;
   color: #dddddd;
@@ -406,23 +340,12 @@ body {
   border-color: #888888;
 }
 
-/* ── Fix: Active "All" filter button white fill in dark mode ── */
-.dark-mode .filter-btn.active {
-  background: #2a2a2a;
-  color: #dddddd;
-  border-color: #888888;
-}
-.dark-mode .filter-btn:hover {
-  border-color: #aaaaaa;
-  color: #ffffff;
-}
 /* ── Export / Import Buttons ── */
-.header-right { 
-  display: flex; 
-  gap: 12px; 
-  align-items: center; 
+.header-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
-
 .action-btn {
   background: transparent;
   color: #cccccc;
@@ -437,13 +360,10 @@ body {
   font-size: 14px;
   transition: all 0.2s;
 }
-
 .action-btn:hover {
   border-color: #aaaaaa;
   color: #ffffff;
 }
-
-/* Ensure they look good in Light Mode too */
 body.light-mode .action-btn {
   color: #666666;
   border-color: #dddddd;
