@@ -416,3 +416,40 @@ body {
   border-color: #aaaaaa;
   color: #ffffff;
 }
+/* ── Export / Import Buttons ── */
+.header-right { 
+  display: flex; 
+  gap: 12px; 
+  align-items: center; 
+}
+
+.action-btn {
+  background: transparent;
+  color: #cccccc;
+  border: 1px solid #444444;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  border-color: #aaaaaa;
+  color: #ffffff;
+}
+
+/* Ensure they look good in Light Mode too */
+body.light-mode .action-btn {
+  color: #666666;
+  border-color: #dddddd;
+}
+body.light-mode .action-btn:hover {
+  color: #111111;
+  border-color: #aaaaaa;
+  background: rgba(0,0,0,0.05);
+}

@@ -16,11 +16,20 @@
         <span class="logo">🧰</span>
         <h1>Tool Box Dashboard</h1>
       </div>
-      <div class="header-right">
+            <div class="header-right">
+        <button id="exportBtn" class="action-btn" title="Download Backup">
+          <i class="fas fa-download"></i>
+        </button>
+        <button id="importBtn" class="action-btn" title="Upload Backup">
+          <i class="fas fa-upload"></i>
+        </button>
+        <input type="file" id="importFile" accept=".json" style="display: none;" />
+        
         <button id="darkModeToggle" class="theme-toggle">
           <i class="fas fa-moon"></i> Dark Mode
         </button>
       </div>
+
     </header>
 
     <main class="main-content">

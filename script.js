@@ -186,6 +186,41 @@ function showToast(msg, type = "success") {
   setTimeout(() => t.classList.add("show"), 10);
   setTimeout(() => { t.classList.remove("show"); setTimeout(() => t.remove(), 350); }, 2800);
 }
+/* ─── Export / Import ─── */
+function exportTools() {
+  const dataStr = JSON.stringify(tools, null, 2);
+  const blob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `toolbox-backup.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("Backup downloaded! 💾", "success");
+}
+
+function importTools(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    try {
+      const imported = JSON.parse(event.target.result);
+      if (Array.isArray(imported)) {
+        tools = imported;
+        saveTools();
+        renderTools();
+        showToast("Backup imported! 🔄", "success");
+      } else {
+        showToast("Invalid file format", "error");
+      }
+    } catch (err) {
+      showToast("Error reading file", "error");
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = ""; // reset input
+}
 
 /* ─── Init ─── */
 document.addEventListener("DOMContentLoaded", () => {
@@ -195,6 +230,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("darkModeToggle").addEventListener("click", toggleTheme);
   document.getElementById("addToolBtn").addEventListener("click", addTool);
+  document.getElementById("exportBtn").addEventListener("click", exportTools);
+  document.getElementById("importBtn").addEventListener("click", () => document.getElementById("importFile").click());
+  document.getElementById("importFile").addEventListener("change", importTools);
 
   ["toolName","toolURL"].forEach(id => {
     document.getElementById(id).addEventListener("keydown", e => { if (e.key === "Enter") addTool(); });
