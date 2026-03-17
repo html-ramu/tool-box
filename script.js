@@ -20,7 +20,9 @@ const DEFAULT_TOOLS = [
   { id: 1773728251242, name: "text wrap", url: "https://b10design.work/", category: "AI Tools" },
   { id: 1773728211874, name: "ticker generator", url: "https://html-ramu.github.io/ticker-generator/", category: "AI Tools" },
   { id: 1773728775428, name: "epaper b10", url: "https://epaperb10vartha.in/#", category: "AI Tools" },
-  { id: 1773728587239, name: "b10vartha", url: "https://www.b10vartha.in/", category: "AI Tools" }
+  { id: 1773728587239, name: "b10vartha", url: "https://www.b10vartha.in/", category: "AI Tools" },
+  { id: 1773730000022, name: "link-lite", url: "https://html-ramu.github.io/link-lite/", category: "Work Tools" }
+
 ];
 
 
