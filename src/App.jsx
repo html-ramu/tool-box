@@ -39,7 +39,8 @@ const DEFAULT_TOOLS = [
   { id: 1775223452858, name: "perplexity-jaiib", url: "https://www.perplexity.ai/search/https-ambitiousbaba-com-https-wz28euwjTOiNyDDvTgnlTw", category: "Other" },
   { id: 1775223313256, name: "anujjindal-jaiib", url: "https://anujjindal.in/jaiib-exam-complete-info/", category: "Other" },
   { id: 1775223571415, name: "iibf-jaiib", url: "https://www.iibf.org.in/", category: "Other" },
-  { id: 1775223770623, name: "iibf-02-jaiib", url: "https://www.iibf.org.in/ELearning.asp", category: "Other" }
+  { id: 1775223770623, name: "iibf-02-jaiib", url: "https://www.iibf.org.in/ELearning.asp", category: "Other" },
+  { id: Date.now(), name: "PhotoRoom BG Remover", url: "https://www.photoroom.com/tools/background-remover", category: "AI Tools" }
 ];
 
 function genId() { 
