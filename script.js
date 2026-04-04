@@ -40,8 +40,10 @@ const DEFAULT_TOOLS = [
   { id: 1775223770623, name: "iibf-02-jaiib", url: "https://www.iibf.org.in/ELearning.asp", category: "Other" }
 ];
 
-
-function genId() { return Date.now() + Math.floor(Math.random() * 1e6); }
+/* ─── Advanced ID Generator ─── */
+function genId() { 
+  return typeof crypto.randomUUID === "function" ? crypto.randomUUID() : Date.now() + Math.floor(Math.random() * 1e6); 
+}
 
 /* ─── State ─── */
 let tools         = [];
@@ -49,12 +51,26 @@ let currentFilter = "All";
 let searchQuery   = "";
 let dragSrcId     = null;
 
-/* ─── LocalStorage ─── */
+/* ─── LocalStorage & Error Handling ─── */
 function loadTools() {
   const saved = localStorage.getItem("toolbox_tools");
-  tools = saved ? JSON.parse(saved) : DEFAULT_TOOLS.map(t => ({ ...t, id: genId() }));
-  if (!saved) saveTools();
+  if (saved) {
+    try {
+      tools = JSON.parse(saved);
+    } catch (error) {
+      console.error("Corrupted LocalStorage data. Resetting to defaults.", error);
+      showToast("Data error. Loaded defaults.", "error");
+      tools = [...DEFAULT_TOOLS];
+    }
+  } else {
+    tools = [...DEFAULT_TOOLS];
+  }
+  
+  // Ensure all items have IDs
+  tools = tools.map(t => t.id ? t : { ...t, id: genId() });
+  saveTools();
 }
+
 function saveTools() { localStorage.setItem("toolbox_tools", JSON.stringify(tools)); }
 
 /* ─── Theme ─── */
@@ -94,6 +110,7 @@ function renderTools() {
   const list      = document.getElementById("toolsList");
   const emptyEl   = document.getElementById("emptyState");
   const countEl   = document.getElementById("toolCount");
+  const hintEl    = document.getElementById("dragHint");
   const filtered  = getFiltered();
 
   list.innerHTML = "";
@@ -101,16 +118,21 @@ function renderTools() {
   if (!filtered.length) {
     emptyEl.style.display = "block";
     countEl.textContent   = "0 Tools";
+    hintEl.style.display  = "none";
     return;
   }
 
   emptyEl.style.display = "none";
   countEl.textContent   = `${filtered.length} Tool${filtered.length !== 1 ? "s" : ""}`;
 
+  // Disable drag if filtering is active to prevent array index scrambling
+  const isFiltered = (searchQuery !== "" || currentFilter !== "All");
+  hintEl.style.display = isFiltered ? "none" : "flex";
+
   filtered.forEach((tool, idx) => {
     const row        = document.createElement("div");
-    row.className    = "tool-row";
-    row.draggable    = true;
+    row.className    = `tool-row ${isFiltered ? 'drag-disabled' : ''}`;
+    row.draggable    = !isFiltered;
     row.dataset.id   = tool.id;
 
     const cleanUrl = tool.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
@@ -121,20 +143,24 @@ function renderTools() {
         <span class="tool-name">${esc(tool.name)}</span>
         <span class="tool-url">${esc(cleanUrl)}</span>
       </div>
+      <span class="category-badge ${catClass(tool.category)}">${esc(tool.category)}</span>
       
       <button class="btn-open" data-url="${esc(tool.url)}">
-        <i class="fas fa-external-link-alt"></i> Open
+        <i class="fas fa-external-link-alt"></i> <span class="btn-text">Open</span>
       </button>
-      
+      <button class="btn-delete" title="Delete Tool">
+        <i class="fas fa-trash"></i>
+      </button>
     `;
 
-    row.querySelector(".btn-open").addEventListener("click",   () => window.open(tool.url, "_blank"));
-    
-    row.addEventListener("dragstart", onDragStart);
-    row.addEventListener("dragover",  onDragOver);
-    row.addEventListener("drop",      onDrop);
-    row.addEventListener("dragend",   onDragEnd);
-    row.addEventListener("dragenter", e => e.preventDefault());
+    // Only attach drag listeners if dragging is allowed
+    if (!isFiltered) {
+      row.addEventListener("dragstart", onDragStart);
+      row.addEventListener("dragover",  onDragOver);
+      row.addEventListener("drop",      onDrop);
+      row.addEventListener("dragend",   onDragEnd);
+      row.addEventListener("dragenter", e => e.preventDefault());
+    }
 
     list.appendChild(row);
   });
@@ -150,8 +176,7 @@ function esc(str) {
 function addTool() {
   let name = document.getElementById("toolName").value.trim();
   let url  = document.getElementById("toolURL").value.trim();
-  const cat = "Other";
-
+  const cat = document.getElementById("toolCategory").value;
 
   if (!name) { showToast("Please enter a tool name", "error"); return; }
   if (!url)  { showToast("Please enter a tool URL",  "error"); return; }
@@ -162,6 +187,7 @@ function addTool() {
 
   document.getElementById("toolName").value = "";
   document.getElementById("toolURL").value  = "";
+  document.getElementById("toolCategory").value = "Other"; // reset default
 
   renderTools();
   showToast(`"${name}" added! ✅`);
@@ -219,6 +245,7 @@ function showToast(msg, type = "success") {
   setTimeout(() => t.classList.add("show"), 10);
   setTimeout(() => { t.classList.remove("show"); setTimeout(() => t.remove(), 350); }, 2800);
 }
+
 /* ─── Export / Import ─── */
 function exportTools() {
   const dataStr = JSON.stringify(tools, null, 2);
@@ -255,24 +282,47 @@ function importTools(e) {
   e.target.value = ""; // reset input
 }
 
-/* ─── Init ─── */
+/* ─── Init & Event Delegation ─── */
 document.addEventListener("DOMContentLoaded", () => {
   loadTools();
   loadTheme();
   renderTools();
 
+  // Settings & Theme
   document.getElementById("darkModeToggle").addEventListener("click", toggleTheme);
-  document.getElementById("addToolBtn").addEventListener("click", addTool);
   document.getElementById("exportBtn").addEventListener("click", exportTools);
   document.getElementById("importBtn").addEventListener("click", () => document.getElementById("importFile").click());
   document.getElementById("importFile").addEventListener("change", importTools);
-
+  
+  // Add tools
+  document.getElementById("addToolBtn").addEventListener("click", addTool);
   ["toolName","toolURL"].forEach(id => {
     document.getElementById(id).addEventListener("keydown", e => { if (e.key === "Enter") addTool(); });
   });
 
+  // Filters
   document.getElementById("searchInput").addEventListener("input", e => {
     searchQuery = e.target.value;
     renderTools();
+  });
+  document.getElementById("filterCategory").addEventListener("change", e => {
+    currentFilter = e.target.value;
+    renderTools();
+  });
+
+  // Event Delegation for List (Open & Delete Buttons)
+  document.getElementById("toolsList").addEventListener("click", e => {
+    // Handle Open
+    const openBtn = e.target.closest(".btn-open");
+    if (openBtn) {
+      window.open(openBtn.dataset.url, "_blank");
+      return;
+    }
+    // Handle Delete
+    const deleteBtn = e.target.closest(".btn-delete");
+    if (deleteBtn) {
+      const row = deleteBtn.closest(".tool-row");
+      deleteTool(row.dataset.id);
+    }
   });
 });
