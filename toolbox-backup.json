@@ -1,0 +1,344 @@
+[
+  {
+    "id": 1773754623800,
+    "name": "Google Keep",
+    "url": "https://keep.google.com",
+    "category": "Work Tools"
+  },
+  {
+    "id": 1773754343285,
+    "name": "ChatGPT",
+    "url": "https://chat.openai.com",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754870472,
+    "name": "gmail",
+    "url": "https://mail.google.com/mail/u/1/#all",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773755100031,
+    "name": "github",
+    "url": "https://github.com/html-ramu",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773755211432,
+    "name": "sarvam",
+    "url": "https://dashboard.sarvam.ai/",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773755239788,
+    "name": "docs",
+    "url": "https://docs.google.com/document/u/1/",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754723597,
+    "name": "drive",
+    "url": "https://drive.google.com/drive/u/1/home",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754601896,
+    "name": "circle crop",
+    "url": "https://html-ramu.github.io/circular-crop-tool/",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754811248,
+    "name": "linked in",
+    "url": "https://www.linkedin.com/feed/",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754700932,
+    "name": "cloud flare",
+    "url": "https://dash.cloudflare.com/login",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754487213,
+    "name": "sora",
+    "url": "https://sora.chatgpt.com/explore",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754743450,
+    "name": "proton mail",
+    "url": "https://account.proton.me/apps",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754936670,
+    "name": "account expert",
+    "url": "https://web.accountsexpertapp.com/new-courses/14-free-material-content?activeTab=content",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754931673,
+    "name": "whats app",
+    "url": "https://web.whatsapp.com/",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773755171889,
+    "name": "green key",
+    "url": "https://html-ramu.github.io/greenkey/",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754354137,
+    "name": "chroma key",
+    "url": "https://html-ramu.github.io/chroma-key-tool/",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773755117995,
+    "name": "news ticker",
+    "url": "https://html-ramu.github.io/news-ticker/",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773755133491,
+    "name": "text wrap",
+    "url": "https://b10design.work/",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754973319,
+    "name": "ticker generator",
+    "url": "https://html-ramu.github.io/ticker-generator/",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754651461,
+    "name": "epaper b10",
+    "url": "https://epaperb10vartha.in/#",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754605025,
+    "name": "b10vartha",
+    "url": "https://www.b10vartha.in/",
+    "category": "AI Tools"
+  },
+  {
+    "id": 1773754303906,
+    "name": "link-lite",
+    "url": "https://html-ramu.github.io/link-lite/",
+    "category": "Work Tools"
+  },
+  {
+    "id": 1773755110095,
+    "name": "Figma",
+    "url": "https://www.figma.com/files/team/1572614101672313643/recents-and-sharing?fuid=1572614099818656258",
+    "category": "Work Tools"
+  },
+  {
+    "id": 1774796167733,
+    "name": "firebase",
+    "url": "https://console.firebase.google.com/u/1/",
+    "category": "Other"
+  },
+  {
+    "id": 1774796270042,
+    "name": "analytics.google",
+    "url": "https://analytics.google.com/",
+    "category": "Other"
+  },
+  {
+    "id": 1775223182910,
+    "name": "godaddy",
+    "url": "https://www.godaddy.com/en-in",
+    "category": "Other"
+  },
+  {
+    "id": 1775223178187,
+    "name": "youtube",
+    "url": "https://www.youtube.com/",
+    "category": "Other"
+  },
+  {
+    "id": 1775223436959,
+    "name": "google messages",
+    "url": "https://messages.google.com/web/welcome",
+    "category": "Other"
+  },
+  {
+    "id": 1775223435500,
+    "name": "arattai",
+    "url": "https://web.arattai.in/",
+    "category": "Other"
+  },
+  {
+    "id": 1775223585051,
+    "name": "rrsarees",
+    "url": "https://rrsareescenterallagadda.com/",
+    "category": "Other"
+  },
+  {
+    "id": 1775223178426,
+    "name": "gemini",
+    "url": "https://gemini.google.com/u/1/app",
+    "category": "Other"
+  },
+  {
+    "id": 1775223905089,
+    "name": "prime video",
+    "url": "https://www.primevideo.com/region/eu/storefront",
+    "category": "Other"
+  },
+  {
+    "id": 1775223189048,
+    "name": "netflix",
+    "url": "https://www.netflix.com/",
+    "category": "Other"
+  },
+  {
+    "id": 1775223611646,
+    "name": "ambitious-baba",
+    "url": "https://ambitiousbaba.com/jaiib-ie-ifs-recollected-questions-2-november-2025-memory-based/",
+    "category": "Other"
+  },
+  {
+    "id": 1775223452858,
+    "name": "perplexity-jaiib",
+    "url": "https://www.perplexity.ai/search/https-ambitiousbaba-com-https-wz28euwjTOiNyDDvTgnlTw",
+    "category": "Other"
+  },
+  {
+    "id": 1775223313256,
+    "name": "anujjindal-jaiib",
+    "url": "https://anujjindal.in/jaiib-exam-complete-info/",
+    "category": "Other"
+  },
+  {
+    "id": 1775223571415,
+    "name": "iibf-jaiib",
+    "url": "https://www.iibf.org.in/",
+    "category": "Other"
+  },
+  {
+    "id": 1775223770623,
+    "name": "iibf-02-jaiib",
+    "url": "https://www.iibf.org.in/ELearning.asp",
+    "category": "Other"
+  },
+  {
+    "id": 1775284508724,
+    "name": "PhotoRoom BG Remover",
+    "url": "https://www.photoroom.com/tools/background-remover",
+    "category": "AI Tools"
+  },
+  {
+    "id": "cfc7c4aa-4f13-4d7e-b761-3f01e413dd41",
+    "name": "cloud google",
+    "url": "https://console.cloud.google.com/billing/018BEC-1C36CE-DDE125?authuser=1",
+    "category": "Other"
+  },
+  {
+    "id": "44c7a9d5-512c-4483-bf40-b5747bb7a20f",
+    "name": "cloud google docs",
+    "url": "https://docs.cloud.google.com/billing/docs/release-notes",
+    "category": "Other"
+  },
+  {
+    "id": "f8804fe8-3eeb-45e7-bb80-e2515db876a2",
+    "name": "cloud quota",
+    "url": "https://docs.cloud.google.com/billing/quotas?authuser=1",
+    "category": "Other"
+  },
+  {
+    "id": "a303d02d-22cd-4a37-ad06-7b7a5fcc0811",
+    "name": "google",
+    "url": "https://www.google.com/",
+    "category": "Work Tools"
+  },
+  {
+    "id": "ee986e45-91b2-4fb0-946a-67ae68f7d992",
+    "name": "silver cet",
+    "url": "https://sites.google.com/sjgckurnool.edu.in/silvercet/old-papers",
+    "category": "Work Tools"
+  },
+  {
+    "id": "d5619380-8b10-461d-a958-6b6a72358f69",
+    "name": "notebook lm",
+    "url": "https://notebooklm.google.com/notebook/23c1eca9-64ae-4939-b6d8-3fcd3d4d0afa?addSource=true&authuser=1",
+    "category": "AI Tools"
+  },
+  {
+    "id": "f42a989c-7248-47f3-af13-93a25b97a682",
+    "name": "meta ai",
+    "url": "https://www.meta.ai/",
+    "category": "AI Tools"
+  },
+  {
+    "id": "bae59ca2-074b-4ec2-a79b-8fcbf80fb997",
+    "name": "meta demo",
+    "url": "https://www.aidemos.meta.com/",
+    "category": "AI Tools"
+  },
+  {
+    "id": "32d05c2b-42c5-40e5-8f95-28d09d61918a",
+    "name": "phot riya reel",
+    "url": "https://www.instagram.com/reel/DXErcG2AopK/",
+    "category": "Work Tools"
+  },
+  {
+    "id": "55ea541e-dd99-4009-8fef-5f607234d583",
+    "name": "phot riya",
+    "url": "https://www.photriya.com/",
+    "category": "Work Tools"
+  },
+  {
+    "id": "2116ef23-8176-4eee-8ca5-981acfdc8926",
+    "name": "introvert",
+    "url": "https://www.amazon.in/s?k=introvert+books&crid=1FRQT56BC4P8K&sprefix=introvert%2Caps%2C411&ref=nb_sb_ss_mvt-t11-ranker_2_9",
+    "category": "Work Tools"
+  },
+  {
+    "id": "e3f09e77-80d9-409a-aabd-9f3153163ab6",
+    "name": "jaiib-pyq-olive",
+    "url": "https://www.oliveboard.in/blog/jaiib-pyps/",
+    "category": "Other"
+  },
+  {
+    "id": "3c85f77b-e6af-4784-877c-05b5f22ce86d",
+    "name": "flow",
+    "url": "https://labs.google/fx/tools/flow",
+    "category": "Work Tools"
+  },
+  {
+    "id": "e3a75e46-b5f2-490d-861a-d2d241682e72",
+    "name": "photography-1",
+    "url": "https://www.candidshutters.com/",
+    "category": "Work Tools"
+  },
+  {
+    "id": "af900860-1e0e-4bc0-bf5f-198ceced19fa",
+    "name": "epaper-maker",
+    "url": "https://html-ramu.github.io/paper/",
+    "category": "Work Tools"
+  },
+  {
+    "id": "0ce7668c-39e5-4934-8729-8162cf738670",
+    "name": "prasad-news",
+    "url": "https://html-ramu.github.io/prasad-news/",
+    "category": "Work Tools"
+  },
+  {
+    "id": "95623a97-5501-4373-93f0-81a1e0ad9bb2",
+    "name": "photography-ramu",
+    "url": "https://html-ramu.github.io/ramu-photography/",
+    "category": "Work Tools"
+  },
+  {
+    "id": "fd94cd30-8488-4504-9141-ac050271ebaa",
+    "name": "adobe-express",
+    "url": "https://new.express.adobe.com/",
+    "category": "Work Tools"
+  }
+]

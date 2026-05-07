@@ -1,328 +1,96 @@
-/* ─── Default Tools ─── */
-const DEFAULT_TOOLS = [
-  { id: 1773754623800, name: "Google Keep", url: "https://keep.google.com", category: "Work Tools" },
-  { id: 1773754343285, name: "ChatGPT", url: "https://chat.openai.com", category: "AI Tools" },
-  { id: 1773754870472, name: "gmail", url: "https://mail.google.com/mail/u/1/#all", category: "AI Tools" },
-  { id: 1773755100031, name: "github", url: "https://github.com/html-ramu", category: "AI Tools" },
-  { id: 1773755211432, name: "sarvam", url: "https://dashboard.sarvam.ai/", category: "AI Tools" },
-  { id: 1773755239788, name: "docs", url: "https://docs.google.com/document/u/1/", category: "AI Tools" },
-  { id: 1773754723597, name: "drive", url: "https://drive.google.com/drive/u/1/home", category: "AI Tools" },
-  { id: 1773754601896, name: "circle crop", url: "https://html-ramu.github.io/circular-crop-tool/", category: "AI Tools" },
-  { id: 1773754811248, name: "linked in", url: "https://www.linkedin.com/feed/", category: "AI Tools" },
-  { id: 1773754700932, name: "cloud flare", url: "https://dash.cloudflare.com/login", category: "AI Tools" },
-  { id: 1773754487213, name: "sora", url: "https://sora.chatgpt.com/explore", category: "AI Tools" },
-  { id: 1773754743450, name: "proton mail", url: "https://account.proton.me/apps", category: "AI Tools" },
-  { id: 1773754936670, name: "account expert", url: "https://web.accountsexpertapp.com/new-courses/14-free-material-content?activeTab=content", category: "AI Tools" },
-  { id: 1773754931673, name: "whats app", url: "https://web.whatsapp.com/", category: "AI Tools" },
-  { id: 1773755171889, name: "green key", url: "https://html-ramu.github.io/greenkey/", category: "AI Tools" },
-  { id: 1773754354137, name: "chroma key", url: "https://html-ramu.github.io/chroma-key-tool/", category: "AI Tools" },
-  { id: 1773755117995, name: "news ticker", url: "https://html-ramu.github.io/news-ticker/", category: "AI Tools" },
-  { id: 1773755133491, name: "text wrap", url: "https://b10design.work/", category: "AI Tools" },
-  { id: 1773754973319, name: "ticker generator", url: "https://html-ramu.github.io/ticker-generator/", category: "AI Tools" },
-  { id: 1773754651461, name: "epaper b10", url: "https://epaperb10vartha.in/#", category: "AI Tools" },
-  { id: 1773754605025, name: "b10vartha", url: "https://www.b10vartha.in/", category: "AI Tools" },
-  { id: 1773754303906, name: "link-lite", url: "https://html-ramu.github.io/link-lite/", category: "Work Tools" },
-  { id: 1773755110095, name: "Figma", url: "https://www.figma.com/files/team/1572614101672313643/recents-and-sharing?fuid=1572614099818656258", category: "Work Tools" },
-  { id: 1774796167733, name: "firebase", url: "https://console.firebase.google.com/u/1/", category: "Other" },
-  { id: 1774796270042, name: "analytics.google", url: "https://analytics.google.com/", category: "Other" },
-  { id: 1775223182910, name: "godaddy", url: "https://www.godaddy.com/en-in", category: "Other" },
-  { id: 1775223178187, name: "youtube", url: "https://www.youtube.com/", category: "Other" },
-  { id: 1775223436959, name: "google messages", url: "https://messages.google.com/web/welcome", category: "Other" },
-  { id: 1775223435500, name: "arattai", url: "https://web.arattai.in/", category: "Other" },
-  { id: 1775223585051, name: "rrsarees", url: "https://rrsareescenterallagadda.com/", category: "Other" },
-  { id: 1775223178426, name: "gemini", url: "https://gemini.google.com/u/1/app", category: "Other" },
-  { id: 1775223905089, name: "prime video", url: "https://www.primevideo.com/region/eu/storefront", category: "Other" },
-  { id: 1775223189048, name: "netflix", url: "https://www.netflix.com/", category: "Other" },
-  { id: 1775223611646, name: "ambitious-baba", url: "https://ambitiousbaba.com/jaiib-ie-ifs-recollected-questions-2-november-2025-memory-based/", category: "Other" },
-  { id: 1775223452858, name: "perplexity-jaiib", url: "https://www.perplexity.ai/search/https-ambitiousbaba-com-https-wz28euwjTOiNyDDvTgnlTw", category: "Other" },
-  { id: 1775223313256, name: "anujjindal-jaiib", url: "https://anujjindal.in/jaiib-exam-complete-info/", category: "Other" },
-  { id: 1775223571415, name: "iibf-jaiib", url: "https://www.iibf.org.in/", category: "Other" },
-  { id: 1775223770623, name: "iibf-02-jaiib", url: "https://www.iibf.org.in/ELearning.asp", category: "Other" }
-];
-
-/* ─── Advanced ID Generator ─── */
-function genId() { 
-  return typeof crypto.randomUUID === "function" ? crypto.randomUUID() : Date.now() + Math.floor(Math.random() * 1e6); 
-}
-
-/* ─── State ─── */
-let tools         = [];
-let currentFilter = "All";
-let searchQuery   = "";
-let dragSrcId     = null;
-
-/* ─── LocalStorage & Error Handling ─── */
-function loadTools() {
-  const saved = localStorage.getItem("toolbox_tools");
-  if (saved) {
-    try {
-      tools = JSON.parse(saved);
-    } catch (error) {
-      console.error("Corrupted LocalStorage data. Resetting to defaults.", error);
-      showToast("Data error. Loaded defaults.", "error");
-      tools = [...DEFAULT_TOOLS];
-    }
-  } else {
-    tools = [...DEFAULT_TOOLS];
-  }
-  
-  // Ensure all items have IDs
-  tools = tools.map(t => t.id ? t : { ...t, id: genId() });
-  saveTools();
-}
-
-function saveTools() { localStorage.setItem("toolbox_tools", JSON.stringify(tools)); }
-
-/* ─── Theme ─── */
-function loadTheme() {
-  const dark = localStorage.getItem("toolbox_theme") === "dark";
-  if (dark) { document.body.classList.replace("light-mode", "dark-mode"); updateThemeBtn(true); }
-}
-function toggleTheme() {
-  const isDark = document.body.classList.contains("dark-mode");
-  document.body.classList.replace(
-    isDark ? "dark-mode" : "light-mode",
-    isDark ? "light-mode" : "dark-mode"
-  );
-  localStorage.setItem("toolbox_theme", isDark ? "light" : "dark");
-  updateThemeBtn(!isDark);
-}
-function updateThemeBtn(isDark) {
-  document.getElementById("darkModeToggle").innerHTML =
-    isDark ? '<i class="fas fa-sun"></i> Light Mode'
-           : '<i class="fas fa-moon"></i> Dark Mode';
-}
-
-/* ─── Category Helper ─── */
-function catClass(cat) {
-  return { "AI Tools": "cat-ai", "News Tools": "cat-news", "Work Tools": "cat-work", "Other": "cat-other" }[cat] || "cat-other";
-}
-
-/* ─── Render ─── */
-function getFiltered() {
-  return tools.filter(t =>
-    (currentFilter === "All" || t.category === currentFilter) &&
-    t.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-}
-
-function renderTools() {
-  const list      = document.getElementById("toolsList");
-  const emptyEl   = document.getElementById("emptyState");
-  const countEl   = document.getElementById("toolCount");
-  const hintEl    = document.getElementById("dragHint");
-  const filtered  = getFiltered();
-
-  list.innerHTML = "";
-
-  if (!filtered.length) {
-    emptyEl.style.display = "block";
-    countEl.textContent   = "0 Tools";
-    hintEl.style.display  = "none";
-    return;
-  }
-
-  emptyEl.style.display = "none";
-  countEl.textContent   = `${filtered.length} Tool${filtered.length !== 1 ? "s" : ""}`;
-
-  // Disable drag if filtering is active to prevent array index scrambling
-  const isFiltered = (searchQuery !== "" || currentFilter !== "All");
-  hintEl.style.display = isFiltered ? "none" : "flex";
-
-  filtered.forEach((tool, idx) => {
-    const row        = document.createElement("div");
-    row.className    = `tool-row ${isFiltered ? 'drag-disabled' : ''}`;
-    row.draggable    = !isFiltered;
-    row.dataset.id   = tool.id;
-
-    const cleanUrl = tool.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
-
-    row.innerHTML = `
-      <div class="tool-number">${idx + 1}</div>
-      <div class="tool-info">
-        <span class="tool-name">${esc(tool.name)}</span>
-        <span class="tool-url">${esc(cleanUrl)}</span>
-      </div>
-      <span class="category-badge ${catClass(tool.category)}">${esc(tool.category)}</span>
-      
-      <button class="btn-open" data-url="${esc(tool.url)}">
-        <i class="fas fa-external-link-alt"></i> <span class="btn-text">Open</span>
-      </button>
-      <button class="btn-delete" title="Delete Tool">
-        <i class="fas fa-trash"></i>
-      </button>
-    `;
-
-    // Only attach drag listeners if dragging is allowed
-    if (!isFiltered) {
-      row.addEventListener("dragstart", onDragStart);
-      row.addEventListener("dragover",  onDragOver);
-      row.addEventListener("drop",      onDrop);
-      row.addEventListener("dragend",   onDragEnd);
-      row.addEventListener("dragenter", e => e.preventDefault());
-    }
-
-    list.appendChild(row);
-  });
-}
-
-function esc(str) {
-  return String(str)
-    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
-}
-
-/* ─── Add Tool ─── */
-function addTool() {
-  let name = document.getElementById("toolName").value.trim();
-  let url  = document.getElementById("toolURL").value.trim();
-  const cat = document.getElementById("toolCategory").value;
-
-  if (!name) { showToast("Please enter a tool name", "error"); return; }
-  if (!url)  { showToast("Please enter a tool URL",  "error"); return; }
-  if (!/^https?:\/\//i.test(url)) url = "https://" + url;
-
-  tools.push({ id: genId(), name, url, category: cat });
-  saveTools();
-
-  document.getElementById("toolName").value = "";
-  document.getElementById("toolURL").value  = "";
-  document.getElementById("toolCategory").value = "Other"; // reset default
-
-  renderTools();
-  showToast(`"${name}" added! ✅`);
-}
-
-/* ─── Delete Tool ─── */
-function deleteTool(id) {
-  const idx = tools.findIndex(t => String(t.id) === String(id));
-  if (idx === -1) return;
-  const name = tools[idx].name;
-  tools.splice(idx, 1);
-  saveTools();
-  renderTools();
-  showToast(`"${name}" removed 🗑️`);
-}
-
-/* ─── Drag & Drop ─── */
-function onDragStart(e) {
-  dragSrcId = this.dataset.id;
-  this.classList.add("dragging");
-  e.dataTransfer.effectAllowed = "move";
-}
-function onDragOver(e) {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = "move";
-  document.querySelectorAll(".tool-row").forEach(r => r.classList.remove("drag-over"));
-  if (this.dataset.id !== dragSrcId) this.classList.add("drag-over");
-}
-function onDrop(e) {
-  e.stopPropagation();
-  const targetId = this.dataset.id;
-  if (dragSrcId !== targetId) {
-    const si = tools.findIndex(t => String(t.id) === String(dragSrcId));
-    const ti = tools.findIndex(t => String(t.id) === String(targetId));
-    if (si !== -1 && ti !== -1) {
-      const [moved] = tools.splice(si, 1);
-      tools.splice(ti, 0, moved);
-      saveTools();
-      renderTools();
-      showToast("Order updated ↕️");
-    }
-  }
-}
-function onDragEnd() {
-  document.querySelectorAll(".tool-row").forEach(r => r.classList.remove("dragging","drag-over"));
-}
-
-/* ─── Toast ─── */
-function showToast(msg, type = "success") {
-  document.querySelector(".toast")?.remove();
-  const t = document.createElement("div");
-  t.className = `toast toast-${type}`;
-  t.innerHTML = `<i class="fas fa-${type === "success" ? "check-circle" : "exclamation-circle"}"></i> ${msg}`;
-  document.body.appendChild(t);
-  setTimeout(() => t.classList.add("show"), 10);
-  setTimeout(() => { t.classList.remove("show"); setTimeout(() => t.remove(), 350); }, 2800);
-}
-
-/* ─── Export / Import ─── */
-function exportTools() {
-  const dataStr = JSON.stringify(tools, null, 2);
-  const blob = new Blob([dataStr], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `toolbox-backup.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-  showToast("Backup downloaded! 💾", "success");
-}
-
-function importTools(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(event) {
-    try {
-      const imported = JSON.parse(event.target.result);
-      if (Array.isArray(imported)) {
-        tools = imported;
-        saveTools();
-        renderTools();
-        showToast("Backup imported! 🔄", "success");
-      } else {
-        showToast("Invalid file format", "error");
-      }
-    } catch (err) {
-      showToast("Error reading file", "error");
-    }
-  };
-  reader.readAsText(file);
-  e.target.value = ""; // reset input
-}
-
-/* ─── Init & Event Delegation ─── */
 document.addEventListener("DOMContentLoaded", () => {
-  loadTools();
-  loadTheme();
-  renderTools();
+    const toolsGrid = document.getElementById("toolsGrid");
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
 
-  // Settings & Theme
-  document.getElementById("darkModeToggle").addEventListener("click", toggleTheme);
-  document.getElementById("exportBtn").addEventListener("click", exportTools);
-  document.getElementById("importBtn").addEventListener("click", () => document.getElementById("importFile").click());
-  document.getElementById("importFile").addEventListener("change", importTools);
-  
-  // Add tools
-  document.getElementById("addToolBtn").addEventListener("click", addTool);
-  ["toolName","toolURL"].forEach(id => {
-    document.getElementById(id).addEventListener("keydown", e => { if (e.key === "Enter") addTool(); });
-  });
+    let allTools = [];
 
-  // Filters
-  document.getElementById("searchInput").addEventListener("input", e => {
-    searchQuery = e.target.value;
-    renderTools();
-  });
-  document.getElementById("filterCategory").addEventListener("change", e => {
-    currentFilter = e.target.value;
-    renderTools();
-  });
-
-  // Event Delegation for List (Open & Delete Buttons)
-  document.getElementById("toolsList").addEventListener("click", e => {
-    // Handle Open
-    const openBtn = e.target.closest(".btn-open");
-    if (openBtn) {
-      window.open(openBtn.dataset.url, "_blank");
-      return;
+    // 1. Fetch data from the JSON file
+    async function loadTools() {
+        try {
+            const response = await fetch("toolbox-backup.json");
+            if (!response.ok) throw new Error("Network response was not ok");
+            
+            allTools = await response.json();
+            
+            populateCategories(allTools);
+            renderTools(allTools);
+        } catch (error) {
+            console.error("Failed to load tools:", error);
+            toolsGrid.innerHTML = `<div class="no-results">Error loading tools. Check console.</div>`;
+        }
     }
-    // Handle Delete
-    const deleteBtn = e.target.closest(".btn-delete");
-    if (deleteBtn) {
-      const row = deleteBtn.closest(".tool-row");
-      deleteTool(row.dataset.id);
+
+    // 2. Extract unique categories and populate the dropdown
+    function populateCategories(tools) {
+        const categories = new Set();
+        tools.forEach(tool => {
+            if (tool.category) {
+                categories.add(tool.category);
+            }
+        });
+
+        // Sort categories alphabetically
+        const sortedCategories = Array.from(categories).sort();
+
+        sortedCategories.forEach(category => {
+            const option = document.createElement("option");
+            option.value = category;
+            option.textContent = category;
+            categoryFilter.appendChild(option);
+        });
     }
-  });
+
+    // 3. Render tools to the DOM
+    function renderTools(toolsToRender) {
+        toolsGrid.innerHTML = ""; // Clear current grid
+
+        if (toolsToRender.length === 0) {
+            toolsGrid.innerHTML = `<div class="no-results">No tools found matching your criteria.</div>`;
+            return;
+        }
+
+        const fragment = document.createDocumentFragment();
+
+        toolsToRender.forEach(tool => {
+            const card = document.createElement("a");
+            card.href = tool.url;
+            card.target = "_blank";
+            card.rel = "noopener noreferrer";
+            card.className = "card";
+
+            card.innerHTML = `
+                <div class="card-name">${tool.name}</div>
+                <div class="card-url">${tool.url.replace(/^https?:\/\/(www\.)?/, '')}</div>
+                <div class="card-category">${tool.category || 'Uncategorized'}</div>
+            `;
+
+            fragment.appendChild(card);
+        });
+
+        toolsGrid.appendChild(fragment);
+    }
+
+    // 4. Handle Search and Filtering logic
+    function filterTools() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const selectedCategory = categoryFilter.value;
+
+        const filteredTools = allTools.filter(tool => {
+            const matchesSearch = tool.name.toLowerCase().includes(searchTerm) || 
+                                  tool.url.toLowerCase().includes(searchTerm);
+            const matchesCategory = selectedCategory === "all" || tool.category === selectedCategory;
+            
+            return matchesSearch && matchesCategory;
+        });
+
+        renderTools(filteredTools);
+    }
+
+    // Event Listeners for controls
+    searchInput.addEventListener("input", filterTools);
+    categoryFilter.addEventListener("change", filterTools);
+
+    // Initialize
+    loadTools();
 });
