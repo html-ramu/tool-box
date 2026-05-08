@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="authOverlay" class="auth-overlay">
+        <div class="auth-box">
+            <h2>Tool Box Sync</h2>
+            <p>Sign in with Google to sync your tools across all devices.</p>
+            <button id="loginBtn" class="btn btn-primary">Sign in with Google</button>
+        </div>
+    </div>
+
     <header class="header">
         <div class="logo">
             <h1>Tool Box</h1>
@@ -18,7 +26,8 @@
                 <option value="all">All Categories</option>
             </select>
             <button id="addToolBtn" class="btn btn-primary">+ Add Tool</button>
-            <button id="exportBtn" class="btn">⬇ Export</button>
+            <button id="importBtn" class="btn" title="Upload toolbox-backup.json to Cloud">⬆ Import JSON</button>
+            <button id="logoutBtn" class="btn" style="color: #ff5555; border-color: #ff5555;">Logout</button>
         </div>
     </header>
 
@@ -29,10 +38,11 @@
     <div id="addModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Add New Tool</h2>
+                <h2 id="modalTitle">Add New Tool</h2>
                 <span class="close-btn" id="closeModal">&times;</span>
             </div>
             <form id="addToolForm">
+                <input type="hidden" id="toolId">
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" id="newName" required placeholder="e.g. GitHub">
@@ -45,11 +55,12 @@
                     <label>Category</label>
                     <input type="text" id="newCategory" required placeholder="e.g. Work Tools or AI Tools">
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Save Tool</button>
+                <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Save to Firebase</button>
             </form>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
