@@ -16,14 +16,39 @@
             <input type="text" id="searchInput" placeholder="Search tools or URLs..." autocomplete="off">
             <select id="categoryFilter">
                 <option value="all">All Categories</option>
-                </select>
+            </select>
+            <button id="addToolBtn" class="btn btn-primary">+ Add Tool</button>
+            <button id="exportBtn" class="btn">⬇ Export</button>
         </div>
     </header>
 
     <main>
-        <div id="toolsGrid" class="grid">
-            </div>
+        <div id="toolsGrid" class="grid"></div>
     </main>
+
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Tool</h2>
+                <span class="close-btn" id="closeModal">&times;</span>
+            </div>
+            <form id="addToolForm">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="newName" required placeholder="e.g. GitHub">
+                </div>
+                <div class="form-group">
+                    <label>URL</label>
+                    <input type="url" id="newUrl" required placeholder="https://github.com">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" id="newCategory" required placeholder="e.g. Work Tools or AI Tools">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Save Tool</button>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
