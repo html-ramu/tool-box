@@ -3,7 +3,7 @@ import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA0P0G9WZUurQAws7Bj8fob5QLkwrN3csQ",
+    apiKey: "AIzaSyA0P9G9WZUurQAws7Bj8fob5QLkwrN3csQ",
     authDomain: "tool-box-7668e.firebaseapp.com",
     projectId: "tool-box-7668e",
     storageBucket: "tool-box-7668e.firebasestorage.app",
